@@ -13,6 +13,8 @@ build:
   number: 0
   run_exports:
     - {{ pin_subpackage('minizip', max_pin='x') }}
+  ignore_run_exports:
+    - gtest
 
 requirements:
   build:
@@ -29,6 +31,7 @@ requirements:
     - xz
     - zlib
     - zstd
+    - gtest
 
 test:
   commands:
@@ -41,8 +44,7 @@ test:
     - test ! -f $PREFIX/lib/libminizip.a                # [unix]
 
 about:
-  home: https://github.com/zlib-ng/minizip-ng
-  # http://zlib.net/zlib_license.html
+  home: https://github.com/zlib-ng/minizicdp-ng
   license: Zlib
   license_family: Other
   license_file: LICENSE
