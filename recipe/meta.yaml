@@ -44,7 +44,7 @@ test:
     - test ! -f $PREFIX/lib/libminizip.a                # [unix]
 
 about:
-  home: https://github.com/zlib-ng/minizicdp-ng
+  home: https://github.com/zlib-ng/minizip-ng
   license: Zlib
   license_family: Other
   license_file: LICENSE
