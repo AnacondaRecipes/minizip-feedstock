@@ -22,7 +22,7 @@ requirements:
     - {{ compiler('cxx') }}  # [not win]
     - cmake
     - make  # [not win]
-    - ninja  # [win]
+    - ninja-base  # [win]
     - pkg-config
   host:
     - bzip2
