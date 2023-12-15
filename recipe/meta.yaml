@@ -13,6 +13,8 @@ build:
   number: 0
   run_exports:
     - {{ pin_subpackage('minizip', max_pin='x') }}
+  ignore_run_exports:
+    - gtest
 
 requirements:
   build:
@@ -20,7 +22,7 @@ requirements:
     - {{ compiler('cxx') }}  # [not win]
     - cmake
     - make  # [not win]
-    - ninja  # [win]
+    - ninja-base  # [win]
     - pkg-config
   host:
     - bzip2
@@ -29,6 +31,7 @@ requirements:
     - xz
     - zlib
     - zstd
+    - gtest
 
 test:
   commands:
@@ -42,7 +45,6 @@ test:
 
 about:
   home: https://github.com/zlib-ng/minizip-ng
-  # http://zlib.net/zlib_license.html
   license: Zlib
   license_family: Other
   license_file: LICENSE
