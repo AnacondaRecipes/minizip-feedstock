@@ -21,6 +21,8 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}  # [not win]
     - cmake
+    # PPMd: CMake FetchContent git-clones ip7z/7zip — not satisfied by the 7zip archiver conda package
+    - git
     - make  # [not win]
     - ninja-base  # [win]
     - pkg-config
