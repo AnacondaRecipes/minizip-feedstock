@@ -1,5 +1,5 @@
 {% set name = "minizip" %}
-{% set version = "4.0.3" %}
+{% set version = "4.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,10 @@ package:
 
 source:
   url: https://github.com/zlib-ng/minizip-ng/archive/{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e39a736d4f55c22fa548e68225b2e92bc22aedd9ab90d002b0c5851e3a7bdace
+  sha256: 3cc35c2cb925dbe67cc801e3234b31b0f30197812a99377352fa1b551ab3d011
+  patches:
+    # Windows: MSVC default is minizip.dll; conda-forge uses libminizip for parity with Unix / tests
+    - win_patch_output_name.patch  # [win]
 
 build:
   number: 0
@@ -21,27 +24,28 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}  # [not win]
     - cmake
+    # PPMd: CMake FetchContent git-clones ip7z/7zip — not satisfied by the 7zip archiver conda package
+    - git
     - make  # [not win]
     - ninja-base  # [win]
     - pkg-config
   host:
-    - bzip2
-    - libiconv  # [not win]
-    - openssl  # [not win]
-    - xz
-    - zlib
-    - zstd
-    - gtest
+    - bzip2 {{ bzip2 }}
+    - libiconv {{ libiconv }}  # [not win]
+    - openssl {{ openssl }}  # [not win]
+    - xz {{ xz }}
+    - zlib {{ zlib }}
+    - zstd {{ zstd }}
+    - gtest {{ gtest }}
 
 test:
   commands:
     # presence of shared libraries
-    - test -f $PREFIX/lib/libminizip${SHLIB_EXT}        # [unix]
+    - test -f $PREFIX/lib/libminizip${SHLIB_EXT}  # [unix]
     - if not exist %LIBRARY_BIN%\libminizip.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\libminizip.lib exit 1  # [win]
-
     # absence of static libraries
-    - test ! -f $PREFIX/lib/libminizip.a                # [unix]
+    - test ! -f $PREFIX/lib/libminizip.a  # [unix]
 
 about:
   home: https://github.com/zlib-ng/minizip-ng
