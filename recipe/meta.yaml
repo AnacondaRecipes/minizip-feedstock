@@ -25,13 +25,13 @@ requirements:
     - ninja-base  # [win]
     - pkg-config
   host:
-    - bzip2
-    - libiconv  # [not win]
-    - openssl  # [not win]
-    - xz
-    - zlib
-    - zstd
-    - gtest
+    - bzip2 {{ bzip2 }}
+    - libiconv {{ libiconv }}  # [not win]
+    - openssl {{ openssl }}  # [not win]
+    - xz {{ xz }}
+    - zlib {{ zlib }}
+    - zstd {{ zstd }}
+    - gtest {{ gtest }}
 
 test:
   commands:
