@@ -8,6 +8,9 @@ package:
 source:
   url: https://github.com/zlib-ng/minizip-ng/archive/{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: 3cc35c2cb925dbe67cc801e3234b31b0f30197812a99377352fa1b551ab3d011
+  patches:
+    # Windows: MSVC default is minizip.dll; conda-forge uses libminizip for parity with Unix / tests
+    - win_patch_output_name.patch  # [win]
 
 build:
   number: 0

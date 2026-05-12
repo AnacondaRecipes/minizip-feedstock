@@ -1,0 +1,14 @@
+# Match Unix-style shared library names on Windows (libminizip.dll / libminizip.lib);
+# same approach as conda-forge/minizip-feedstock.
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -703,6 +703,7 @@
+ configure_file(minizip.pc.cmakein ${MINIZIP_PC} @ONLY)
+
+ # Create minizip library and aliases
+ add_library(${MINIZIP_TARGET} ${MINIZIP_SRC} ${MINIZIP_HDR})
+ add_library(MINIZIP::${MINIZIP_TARGET} ALIAS ${MINIZIP_TARGET})
++set_target_properties(${MINIZIP_TARGET} PROPERTIES OUTPUT_NAME "libminizip")
+ if(NOT TARGET MINIZIP::minizip)
+  add_library(MINIZIP::minizip ALIAS ${MINIZIP_TARGET})
+ endif()
